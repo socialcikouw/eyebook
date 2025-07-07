@@ -72,7 +72,7 @@ export const useAddTransaksi = () => {
               try {
                 router.back();
               } catch (error) {
-                console.error("Error navigating back:", error);
+                console.error("Error navigating:", error);
                 router.back();
               }
             }, 500);

@@ -142,7 +142,7 @@ export default function KaryawanForm() {
             onChangeText={(value) => handleTextInput(value, "nama")}
             autoCapitalize="characters"
             required
-            maxLength={18}
+            maxLength={21}
           />
 
           {/* Ressort */}
@@ -153,7 +153,7 @@ export default function KaryawanForm() {
             onChangeText={(value) => handleTextInput(value, "ressort")}
             autoCapitalize="words"
             required
-            maxLength={18}
+            maxLength={21}
           />
 
           {/* Saldo Awal */}

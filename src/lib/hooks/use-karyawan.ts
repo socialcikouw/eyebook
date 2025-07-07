@@ -53,22 +53,8 @@ export const useAddKaryawan = () => {
       Alert.alert("Error", "Gagal menambahkan karyawan.");
     },
     onSuccess: () => {
-      Alert.alert("Sukses", "Karyawan berhasil ditambahkan.", [
-        {
-          text: "OK",
-          onPress: () => {
-            setTimeout(() => {
-              try {
-                router.back();
-              } catch (error) {
-                console.error("Error navigating back:", error);
-                // Fallback navigation
-                router.back();
-              }
-            }, 500);
-          },
-        },
-      ]);
+      router.back();
+      Alert.alert("Sukses", "Karyawan berhasil ditambahkan.");
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: KARYAWAN_KEY });
