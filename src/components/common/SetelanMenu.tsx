@@ -4,20 +4,26 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // Type menu item
-export interface MenuItemProps {
+export interface SetelanMenuItemProps {
   title: string;
   lefticon: keyof typeof Ionicons.glyphMap;
   righticon: keyof typeof Ionicons.glyphMap;
   onPress: () => void;
 }
 
-interface MenuSectionProps {
+// Type untuk section menu
+interface SetelanMenuSectionProps {
   sectionTitle: string;
-  items: MenuItemProps[];
+  items: SetelanMenuItemProps[];
 }
 
 // Menu item reusable
-const MenuItem = ({ title, lefticon, righticon, onPress }: MenuItemProps) => (
+const SetelanCard = ({
+  title,
+  lefticon,
+  righticon,
+  onPress,
+}: SetelanMenuItemProps) => (
   <TouchableOpacity style={styles.menuItem} onPress={onPress}>
     <View style={styles.menuItemLeft}>
       <Ionicons name={lefticon} size={24} color={colors.textPrimary} />
@@ -27,12 +33,15 @@ const MenuItem = ({ title, lefticon, righticon, onPress }: MenuItemProps) => (
   </TouchableOpacity>
 );
 
-export const MenuSection = ({ sectionTitle, items }: MenuSectionProps) => {
+export const SetelanMenu = ({
+  sectionTitle,
+  items,
+}: SetelanMenuSectionProps) => {
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>{sectionTitle}</Text>
       {items.map((item, index) => (
-        <MenuItem
+        <SetelanCard
           key={`${item.title}-${index}`}
           title={item.title}
           lefticon={item.lefticon}

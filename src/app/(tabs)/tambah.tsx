@@ -15,12 +15,8 @@ import {
 export default function tambah() {
   const { data: karyawan = [], isLoading } = useKaryawan();
 
-  const handleAddTransaksi = (karyawanId: number, nama: string) => {
-    router.push(
-      `/(modals)/transaksi-form?id=${karyawanId}&nama=${encodeURIComponent(
-        nama
-      )}`
-    );
+  const handleAddTransaksi = (karyawanId: number) => {
+    router.push(`/(modals)/transaksi-form?karyawan_id=${karyawanId}`);
   };
 
   if (isLoading) {
@@ -44,9 +40,9 @@ export default function tambah() {
         <View style={styles.cardContainer}>
           {karyawan.map((item) => (
             <TouchableOpacity
-              key={`karyawan-tambah-${item.id}`}
+              key={`transaksi-tambah-${item.id}`}
               style={styles.card}
-              onPress={() => handleAddTransaksi(item.id, item.nama)}
+              onPress={() => handleAddTransaksi(item.id)}
               activeOpacity={0.7}
             >
               <View style={styles.cardContent}>
@@ -56,7 +52,7 @@ export default function tambah() {
                   <Ionicons
                     name="chevron-forward-outline"
                     size={25}
-                    color={colors.textPrimary}
+                    color={colors.primary}
                   />
                 </View>
               </View>
@@ -107,22 +103,16 @@ const styles = StyleSheet.create({
 
   subtitle: {
     fontSize: 12,
-    color: colors.primaryDark,
+    color: colors.black,
     textAlign: "center",
   },
   cardContainer: {
     gap: 12,
   },
   card: {
-    backgroundColor: colors.borderLight,
+    borderWidth: 1,
+    borderColor: colors.primary,
     borderRadius: 12,
-    // shadowColor: colors.textPrimary,
-    // shadowOffset: { width: 0, height: 4 },
-    // shadowOpacity: 0.12,
-    // shadowRadius: 8,
-    // elevation: 3,
-    // borderWidth: 1,
-    // borderColor: colors.border,
   },
   cardContent: {
     padding: 12,
@@ -135,7 +125,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontWeight: "600",
-    color: colors.textPrimary,
+    color: colors.primary,
     flex: 1,
   },
   cardBadge: {

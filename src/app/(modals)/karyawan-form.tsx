@@ -1,6 +1,6 @@
 import FormInput from "@/src/components/common/FormInput";
+import { LoadingState } from "@/src/components/common/LoadingState";
 import Tombol from "@/src/components/common/Tombol";
-import { LoadingState } from "@/src/components/ui/LoadingState";
 import {
   useAddKaryawan,
   useKaryawanById,

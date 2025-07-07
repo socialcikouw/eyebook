@@ -1,89 +1,78 @@
+import KaryawanList from "@/src/components/common/KaryawanList";
 import { useKaryawan } from "@/src/lib/hooks/use-karyawan";
-import { colors } from "@/src/lib/styles/colors";
+import { useTransaksi } from "@/src/lib/hooks/use-transaksi";
+import { KaryawanWithTotals } from "@/src/lib/types/karyawan.types";
 import { router } from "expo-router";
-import React from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { useMemo } from "react";
 
 export default function index() {
-  const { data: karyawan = [], isLoading } = useKaryawan();
-  const handlePush = (id: number) => {
-    router.push(`/(modals)/detail-transaksi?id=${id}`);
+  const { data: karyawan = [], isLoading: isLoadingKaryawan } = useKaryawan();
+  const { data: transaksi = [], isLoading: isLoadingTransaksi } =
+    useTransaksi();
+
+  // Hitung total per karyawan untuk semua transaksi
+  const karyawanWithTotals = useMemo(() => {
+    console.log("=== DEBUG TRANSAKSI ===");
+    console.log("Total transaksi:", transaksi.length);
+    console.log("Total karyawan:", karyawan.length);
+
+    return karyawan.map((karyawanItem) => {
+      // Filter transaksi untuk karyawan ini (sementara semua transaksi untuk debug)
+      const transaksiKaryawan = transaksi.filter((item) => {
+        const isKaryawanMatch = item.karyawan_id === karyawanItem.id;
+
+        if (isKaryawanMatch) {
+          console.log(
+            `✅ Transaksi ID ${item.transaksi_id} untuk karyawan ${karyawanItem.nama}:`
+          );
+          console.log("- Sisa tunai:", item.sisa_tunai);
+          console.log("- Gaji storting:", item.gaji_storting);
+          console.log("- Created at:", item.created_at);
+        }
+
+        return isKaryawanMatch;
+      });
+
+      console.log(
+        `Karyawan ${karyawanItem.nama}: ${transaksiKaryawan.length} transaksi total`
+      );
+
+      // Hitung total sisa tunai dan gaji storting
+      const totalSisaTunai = transaksiKaryawan.reduce(
+        (total, item) => total + item.sisa_tunai,
+        0
+      );
+
+      const totalGajiStorting = transaksiKaryawan.reduce(
+        (total, item) => total + item.gaji_storting,
+        0
+      );
+
+      return {
+        ...karyawanItem,
+        totalSisaTunai,
+        totalGajiStorting,
+        jumlahTransaksi: transaksiKaryawan.length,
+      };
+    });
+  }, [karyawan, transaksi]);
+
+  const handleKaryawanPress = (item: KaryawanWithTotals) => {
+    router.push(`/(modals)/detail-transaksi?id=${item.id}`);
   };
 
-  if (isLoading) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.loadingText}>Memuat data karyawan...</Text>
-      </View>
-    );
-  }
+  const handleAddKaryawan = () => {
+    router.push("/(modals)/karyawan-form");
+  };
+
+  const isLoading = isLoadingKaryawan || isLoadingTransaksi;
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.list}>
-        {karyawan.map((item) => (
-          <TouchableOpacity
-            key={`karyawan-${item.id}`}
-            style={styles.itemContainer}
-            onPress={() => handlePush(item.id)}
-          >
-            <Text style={styles.itemName}>{item.nama}</Text>
-            <Text style={styles.itemRessort}>{item.ressort}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </ScrollView>
+    <KaryawanList
+      karyawan={karyawanWithTotals}
+      isLoading={isLoading}
+      onKaryawanPress={handleKaryawanPress}
+      onAddKaryawan={handleAddKaryawan}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: colors.textPrimary,
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: colors.textSecondary,
-  },
-  list: {
-    padding: 16,
-  },
-  itemContainer: {
-    backgroundColor: colors.surface,
-    padding: 16,
-    marginBottom: 12,
-    borderRadius: 8,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  itemName: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: colors.textPrimary,
-    marginBottom: 4,
-  },
-  itemRessort: {
-    fontSize: 14,
-    color: colors.textSecondary,
-  },
-  loadingText: {
-    fontSize: 16,
-    color: colors.textSecondary,
-    textAlign: "center",
-    marginTop: 50,
-  },
-});

@@ -1,12 +1,16 @@
+import {
+  SetelanMenu,
+  SetelanMenuItemProps,
+} from "@/src/components/common/SetelanMenu";
 import { router } from "expo-router";
 import React from "react";
 import { Alert, StyleSheet, View } from "react-native";
-import { MenuItemProps, MenuSection } from "../ui/MenuSection";
+
 // Pastikan path sesuai
 
-export default function MenuSetelan() {
+export default function SetelanCard() {
   // Section 1: Data & Master
-  const dataMenu: MenuItemProps[] = [
+  const dataMenu: SetelanMenuItemProps[] = [
     {
       title: "Data Karyawan",
       lefticon: "people-outline",
@@ -22,7 +26,7 @@ export default function MenuSetelan() {
   ];
 
   // Section 2: Pengaturan
-  const settingsMenu: MenuItemProps[] = [
+  const settingsMenu: SetelanMenuItemProps[] = [
     {
       title: "Riwayat Aktivitas",
       lefticon: "time-outline",
@@ -44,7 +48,7 @@ export default function MenuSetelan() {
   ];
 
   // Section 3: Tools & Bantuan
-  const toolsMenu: MenuItemProps[] = [
+  const toolsMenu: SetelanMenuItemProps[] = [
     {
       title: "Tentang Aplikasi",
       lefticon: "information-circle-outline",
@@ -66,7 +70,7 @@ export default function MenuSetelan() {
   ];
 
   // Section 4: Akun
-  const accountMenu: MenuItemProps[] = [
+  const accountMenu: SetelanMenuItemProps[] = [
     {
       title: "Logout",
       lefticon: "log-out-outline",
@@ -82,10 +86,10 @@ export default function MenuSetelan() {
 
   return (
     <View style={styles.container}>
-      <MenuSection sectionTitle="Data & Master" items={dataMenu} />
-      <MenuSection sectionTitle="Pengaturan" items={settingsMenu} />
-      <MenuSection sectionTitle="Tools & Bantuan" items={toolsMenu} />
-      <MenuSection sectionTitle="Akun" items={accountMenu} />
+      <SetelanMenu sectionTitle="Data & Master" items={dataMenu} />
+      <SetelanMenu sectionTitle="Pengaturan" items={settingsMenu} />
+      <SetelanMenu sectionTitle="Tools & Bantuan" items={toolsMenu} />
+      <SetelanMenu sectionTitle="Akun" items={accountMenu} />
     </View>
   );
 }

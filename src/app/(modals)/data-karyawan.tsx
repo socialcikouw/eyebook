@@ -1,6 +1,6 @@
 import DataList from "@/src/components/common/DataList";
-import { EmptyState } from "@/src/components/ui/EmptyState";
-import { LoadingState } from "@/src/components/ui/LoadingState";
+import { EmptyState } from "@/src/components/common/EmptyState";
+import { LoadingState } from "@/src/components/common/LoadingState";
 import { useKaryawan } from "@/src/lib/hooks/use-karyawan";
 import { KaryawanType } from "@/src/lib/types/karyawan.types";
 import { router } from "expo-router";

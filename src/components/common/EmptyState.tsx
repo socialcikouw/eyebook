@@ -9,33 +9,34 @@ interface EmptyStateProps {
   onActionPress?: () => void;
 }
 
-export const EmptyState: React.FC<EmptyStateProps> = ({
-  icon = "📝",
+export function EmptyState({
+  icon = "📭",
   title,
   subtitle,
   actionText,
   onActionPress,
-}) => {
+}: EmptyStateProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.icon}>{icon}</Text>
       <Text style={styles.title}>{title}</Text>
       {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
       {actionText && onActionPress && (
-        <TouchableOpacity style={styles.actionButton} onPress={onActionPress}>
-          <Text style={styles.actionText}>{actionText}</Text>
+        <TouchableOpacity style={styles.button} onPress={onActionPress}>
+          <Text style={styles.buttonText}>{actionText}</Text>
         </TouchableOpacity>
       )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 32,
+    paddingVertical: 60,
+    paddingHorizontal: 20,
   },
   icon: {
     fontSize: 48,
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "600",
     color: "#333",
     marginBottom: 8,
     textAlign: "center",
@@ -52,18 +53,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#666",
     textAlign: "center",
+    marginBottom: 24,
     lineHeight: 20,
-    marginBottom: 20,
   },
-  actionButton: {
+  button: {
     backgroundColor: "#007AFF",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
     borderRadius: 8,
   },
-  actionText: {
+  buttonText: {
     color: "white",
-    fontSize: 16,
     fontWeight: "600",
+    fontSize: 14,
   },
 });

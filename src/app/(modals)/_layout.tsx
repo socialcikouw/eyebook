@@ -23,9 +23,9 @@ export default function ModalsLayout() {
               backgroundColor: colors.white,
             },
             headerTitleStyle: {
-              fontSize: 18,
+              fontSize: 22,
               fontWeight: "bold",
-              color: colors.textPrimary,
+              color: colors.primary,
             },
             headerTintColor: colors.primary,
           };
@@ -40,9 +40,9 @@ export default function ModalsLayout() {
             backgroundColor: colors.white,
           },
           headerTitleStyle: {
-            fontSize: 18,
+            fontSize: 22,
             fontWeight: "bold",
-            color: colors.textPrimary,
+            color: colors.primary,
           },
           headerTintColor: colors.primary,
         }}
@@ -56,9 +56,9 @@ export default function ModalsLayout() {
             backgroundColor: colors.white,
           },
           headerTitleStyle: {
-            fontSize: 18,
+            fontSize: 22,
             fontWeight: "bold",
-            color: colors.textPrimary,
+            color: colors.primary,
           },
           headerTintColor: colors.primary,
         }}
@@ -72,9 +72,9 @@ export default function ModalsLayout() {
             backgroundColor: colors.white,
           },
           headerTitleStyle: {
-            fontSize: 18,
+            fontSize: 22,
             fontWeight: "bold",
-            color: colors.textPrimary,
+            color: colors.primary,
           },
           headerTintColor: colors.primary,
         }}
@@ -88,9 +88,9 @@ export default function ModalsLayout() {
             backgroundColor: colors.white,
           },
           headerTitleStyle: {
-            fontSize: 18,
+            fontSize: 22,
             fontWeight: "bold",
-            color: colors.textPrimary,
+            color: colors.primary,
           },
           headerTintColor: colors.primary,
         }}
@@ -101,32 +101,20 @@ export default function ModalsLayout() {
         options={({
           route,
         }: {
-          route: {
-            params?: {
-              id?: string;
-              mode?: string;
-              karyawanId?: string;
-              nama?: string;
-            };
-          };
+          route: { params?: { id?: string; mode?: string } };
         }) => {
           // Ambil parameter dari route
-          const params = route.params as {
-            id?: string;
-            mode?: string;
-            karyawanId?: string;
-            nama?: string;
-          };
-          const namaKaryawan = params?.nama || "Karyawan";
+          const params = route.params as { id?: string; mode?: string };
+          const isEditMode = params?.mode === "edit" || !!params?.id;
 
           return {
             headerShown: true,
-            title: ` ${namaKaryawan}`,
+            title: isEditMode ? "Edit Transaksi" : "Tambah Transaksi",
             headerStyle: {
               backgroundColor: colors.white,
             },
             headerTitleStyle: {
-              fontSize: 18,
+              fontSize: 22,
               fontWeight: "bold",
               color: colors.primary,
             },
@@ -144,7 +132,7 @@ export default function ModalsLayout() {
             backgroundColor: colors.white,
           },
           headerTitleStyle: {
-            fontSize: 18,
+            fontSize: 22,
             fontWeight: "bold",
             color: colors.primary,
           },

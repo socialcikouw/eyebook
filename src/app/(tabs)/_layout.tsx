@@ -44,7 +44,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Partners",
-          headerTitle: "NaelCapital",
+          headerTitle: "eyebook",
           headerTitleStyle: {
             fontSize: 22,
             fontWeight: "bold",
@@ -93,7 +93,7 @@ export default function TabLayout() {
         name="tambah"
         options={{
           title: "Tambah",
-          headerTitle: "Tambah Transaksi",
+          headerTitle: "Pilih Karyawan",
           headerTitleStyle: {
             fontSize: 22,
             fontWeight: "bold",
