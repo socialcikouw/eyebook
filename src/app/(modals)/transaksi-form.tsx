@@ -215,9 +215,9 @@ export default function TransaksiForm() {
           </View>
         </View>
 
-        {/* <View style={styles.formContainer}>
+        <View style={styles.formContainer}>
           <Text style={styles.sectionTitle}>Perhitungan Otomatis</Text>
-       
+
           <View style={styles.fieldRow}>
             <View style={styles.fieldItem}>
               <FormInput
@@ -239,7 +239,6 @@ export default function TransaksiForm() {
             </View>
           </View>
 
-        
           <View style={styles.fieldRow}>
             <View style={styles.fieldItem}>
               <FormInput
@@ -261,7 +260,6 @@ export default function TransaksiForm() {
             </View>
           </View>
 
-        
           <View style={styles.fieldRow}>
             <View style={styles.fieldItem}>
               <FormInput
@@ -283,7 +281,6 @@ export default function TransaksiForm() {
             </View>
           </View>
 
-         
           <View style={styles.fieldRow}>
             <View style={styles.fieldItemSingle}>
               <FormInput
@@ -295,7 +292,7 @@ export default function TransaksiForm() {
               />
             </View>
           </View>
-        </View> */}
+        </View>
 
         {/* Form Validation Info */}
         {!isFormValid && selectedKaryawan && (
